@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Ecommerce</string>
+    <string name="search_here">Search here...</string>
+    <string name="g">G</string>
+    <string name="all">All</string>
+    <string name="women_s_clothing">Women\'s Clothing</string>
+    <string name="men_s_clothing">Men\'s Clothing</string>
+    <string name="jewelery">Jewelery</string>
+    <string name="electronics">Electronics</string>
+    <string name="imgproduct">imgProduct</string>
+</resources>
