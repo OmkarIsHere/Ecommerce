@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final String urlSortProductsDesc = "https://fakestoreapi.com/products?sort=desc";
 
     ArrayList<Products> productsArrayList = new ArrayList<>();
+    ArrayList<String> arrSpinner = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,22 +70,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menClothing.setOnClickListener(this);
         womensClothing.setOnClickListener(this);
 
-        allProducts.setSelected(true);
-
         recyclerProducts = (RecyclerView)findViewById(R.id.recyclerProducts);
         recyclerProducts.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
 
+        arrSpinner.add("New to Old");
+        arrSpinner.add("Old to New");
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrSpinner);
+        spinnerSort.setAdapter(spinnerAdapter);
 
+        spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               String selected = spinnerSort.getSelectedItem().toString();
+               if(selected.equals("New to Old")){
+                   setProductData(urlSortProductsDesc);
+               }else{
+                   setProductData(urlSortProductsAsc);
+               }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
     @Override
     public void onClick(View v) {
         int id = v.getId();
             if (id == R.id.txtAll) {
-                electronics.setSelected(false);
-                jewelery.setSelected(false);
-                menClothing.setSelected(false);
-                womensClothing.setSelected(false);
-                allProducts.setSelected(true);
                 setProductData(urlAllProducts);
 //                electronics.setBackgroundColor(R.drawable.bg_category_unselect);
 //                jewelery.setBackgroundColor(R.drawable.bg_category_unselect);
@@ -92,11 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Toast.makeText(this, R.string.all, Toast.LENGTH_SHORT).show();
             }
             else if(id == R.id.txtElectronics) {
-                allProducts.setSelected(false);
-                jewelery.setSelected(false);
-                menClothing.setSelected(false);
-                womensClothing.setSelected(false);
-                electronics.setSelected(true);
                 setProductData(urlElectronicsProducts);
 
 //                allProducts.setBackgroundColor(R.drawable.bg_category_unselect);
@@ -106,11 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                electronics.setBackgroundColor(R.drawable.bg_category_selected);
             }
             else if(id == R.id.txtJewelery) {
-                allProducts.setSelected(false);
-                electronics.setSelected(false);
-                menClothing.setSelected(false);
-                womensClothing.setSelected(false);
-                jewelery.setSelected(true);
                 setProductData(urlJeweleryProducts);
 //                allProducts.setBackgroundColor(R.drawable.bg_category_unselect);
 //                electronics.setBackgroundColor(R.drawable.bg_category_unselect);
@@ -120,11 +126,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Toast.makeText(this, R.string.jewelery, Toast.LENGTH_SHORT).show();
             }
             else if(id ==  R.id.txtMensClothing) {
-                allProducts.setSelected(false);
-                electronics.setSelected(false);
-                jewelery.setSelected(false);
-                womensClothing.setSelected(false);
-                menClothing.setSelected(true);
                 setProductData(urlmenClothingProducts);
 //                allProducts.setBackgroundColor(R.drawable.bg_category_unselect);
 //                jewelery.setBackgroundColor(R.drawable.bg_category_unselect);
@@ -134,11 +135,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Toast.makeText(this, R.string.men_s_clothing, Toast.LENGTH_SHORT).show();
             }
             else if(id == R.id.txtWomensClothing) {
-                allProducts.setSelected(false);
-                electronics.setSelected(false);
-                jewelery.setSelected(false);
-                menClothing.setSelected(false);
-                womensClothing.setSelected(true);
                 setProductData(urlwomensClothingProducts);
 //                allProducts.setBackgroundColor(R.drawable.bg_category_unselect);
 //                jewelery.setBackgroundColor(R.drawable.bg_category_unselect);
@@ -154,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        if(!productsArrayList.isEmpty()){
+                            productsArrayList.clear();
+                        }
                         try {
                             JSONArray list = new JSONArray(response);
                             for(int i=0; i<list.length(); i++){
@@ -164,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 String pPrice = listObjects.getString("price");
                                 String pCategory = listObjects.getString("category");
                                 String pDescription = listObjects.getString("description");
+
 
                                 Products products = new Products(pId, pImg, pTitle, pPrice, pCategory, pDescription);
                                 productsArrayList.add(products);
@@ -200,5 +200,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 }
-
-

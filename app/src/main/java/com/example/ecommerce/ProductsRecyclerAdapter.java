@@ -54,9 +54,16 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         }else{
             holder.pimg.setBackgroundResource(R.drawable.no_image);
         }
-
-        holder.ptitle.setText(arrProducts.get(position).pTitle);
-        holder.pprice.setText(arrProducts.get(position).pPrice);
+        String title = arrProducts.get(position).pTitle;
+        if(title.length() > 33){
+            String firstHalf = title.substring(0,32);
+            String fullString = firstHalf + "...";
+            holder.ptitle.setText(fullString);
+        }else{
+            holder.ptitle.setText(title);
+        }
+        String price ="Rs. "+ (arrProducts.get(position).pPrice) + "/-";
+        holder.pprice.setText(price);
         holder.pid.setText(arrProducts.get(position).pId);
         holder.pdesc.setText(arrProducts.get(position).pDescription);
         holder.pcat.setText(arrProducts.get(position).pCategory);
