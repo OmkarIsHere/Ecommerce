@@ -2,6 +2,7 @@ package com.example.ecommerce;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -30,6 +31,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         pdesc = findViewById(R.id.txtProductDesc);
         pimg = findViewById(R.id.imgProduct);
         btnBack = findViewById(R.id.btnBack);
+        addToCart = findViewById(R.id.btnAddCart);
 
         if(getIntent().hasExtra("pid")){
             pId = getIntent().getStringExtra("pid");
@@ -57,6 +59,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         btnBack.setOnClickListener(v -> {
             onBackPressed();
+        });
+
+        addToCart.setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginActivity.class));
         });
     }
 
