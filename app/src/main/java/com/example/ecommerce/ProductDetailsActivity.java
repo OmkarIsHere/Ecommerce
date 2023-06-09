@@ -90,7 +90,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         addToCart.setOnClickListener(v -> {
             SharedPreferences alldata = getSharedPreferences("alldata", MODE_PRIVATE);
-            String uId = alldata.getString("uId", "id");
+            String uId = alldata.getString("uId", "0");
             if(!uId.equals("0")){
                 Dialog dialog = new Dialog(ProductDetailsActivity.this);
                 dialog.setContentView(R.layout.layout_alert_dialog);
@@ -119,8 +119,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                    pQuantity.setText(String.valueOf(i));
                 });
 
-
-
                 btnCancel.setOnClickListener(v1 -> dialog.dismiss());
                 btnContinue.setOnClickListener(v12 -> {
                     String quantity = String.valueOf(pQuantity.getText());
@@ -144,6 +142,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             status = jsonObject.getString("status");
 
+                                relativeLayout.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
                             if (status.equals("success")){
                                 Intent i = new Intent(ProductDetailsActivity.this, MainActivity.class);
                                 startActivity(i);

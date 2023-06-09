@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                 prefEditor.putString("email",email);
                                 prefEditor.apply();
 
-                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(i);
                             }
                             else{
