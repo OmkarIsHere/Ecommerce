@@ -100,47 +100,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = v.getId();
             if (id == R.id.txtAll) {
                 setProductData(urlAllProducts);
-//                electronics.setBackgroundColor(R.drawable.bg_category_unselect);
-//                jewelery.setBackgroundColor(R.drawable.bg_category_unselect);
-//                menClothing.setBackgroundColor(R.drawable.bg_category_unselect);
-//                womensClothing.setBackgroundColor(R.drawable.bg_category_unselect);
-//                allProducts.setBackgroundColor(R.drawable.bg_category_selected);
+                electronics.setBackgroundResource(R.drawable.bg_category_unselect);
+                jewelery.setBackgroundResource(R.drawable.bg_category_unselect);
+                menClothing.setBackgroundResource(R.drawable.bg_category_unselect);
+                womensClothing.setBackgroundResource(R.drawable.bg_category_unselect);
+                allProducts.setBackgroundResource(R.drawable.bg_category_selected);
 //                Toast.makeText(this, R.string.all, Toast.LENGTH_SHORT).show();
             }
             else if(id == R.id.txtElectronics) {
                 setProductData(urlElectronicsProducts);
 
-//                allProducts.setBackgroundColor(R.drawable.bg_category_unselect);
-//                jewelery.setBackgroundColor(R.drawable.bg_category_unselect);
-//                menClothing.setBackgroundColor(R.drawable.bg_category_unselect);
-//                womensClothing.setBackgroundColor(R.drawable.bg_category_unselect);
-//                electronics.setBackgroundColor(R.drawable.bg_category_selected);
+                allProducts.setBackgroundResource(R.drawable.bg_category_unselect);
+                jewelery.setBackgroundResource(R.drawable.bg_category_unselect);
+                menClothing.setBackgroundResource(R.drawable.bg_category_unselect);
+                womensClothing.setBackgroundResource(R.drawable.bg_category_unselect);
+                electronics.setBackgroundResource(R.drawable.bg_category_selected);
             }
             else if(id == R.id.txtJewelery) {
                 setProductData(urlJeweleryProducts);
-//                allProducts.setBackgroundColor(R.drawable.bg_category_unselect);
-//                electronics.setBackgroundColor(R.drawable.bg_category_unselect);
-//                menClothing.setBackgroundColor(R.drawable.bg_category_unselect);
-//                womensClothing.setBackgroundColor(R.drawable.bg_category_unselect);
-//                jewelery.setBackgroundColor(R.drawable.bg_category_selected);
+                allProducts.setBackgroundResource(R.drawable.bg_category_unselect);
+                electronics.setBackgroundResource(R.drawable.bg_category_unselect);
+                menClothing.setBackgroundResource(R.drawable.bg_category_unselect);
+                womensClothing.setBackgroundResource(R.drawable.bg_category_unselect);
+                jewelery.setBackgroundResource(R.drawable.bg_category_selected);
 //                Toast.makeText(this, R.string.jewelery, Toast.LENGTH_SHORT).show();
             }
             else if(id ==  R.id.txtMensClothing) {
                 setProductData(urlmenClothingProducts);
-//                allProducts.setBackgroundColor(R.drawable.bg_category_unselect);
-//                jewelery.setBackgroundColor(R.drawable.bg_category_unselect);
-//                electronics.setBackgroundColor(R.drawable.bg_category_unselect);
-//                womensClothing.setBackgroundColor(R.drawable.bg_category_unselect);
-//                menClothing.setBackgroundColor(R.drawable.bg_category_selected);
+                allProducts.setBackgroundResource(R.drawable.bg_category_unselect);
+                jewelery.setBackgroundResource(R.drawable.bg_category_unselect);
+                electronics.setBackgroundResource(R.drawable.bg_category_unselect);
+                womensClothing.setBackgroundResource(R.drawable.bg_category_unselect);
+                menClothing.setBackgroundResource(R.drawable.bg_category_selected);
 //                Toast.makeText(this, R.string.men_s_clothing, Toast.LENGTH_SHORT).show();
             }
             else if(id == R.id.txtWomensClothing) {
                 setProductData(urlwomensClothingProducts);
-//                allProducts.setBackgroundColor(R.drawable.bg_category_unselect);
-//                jewelery.setBackgroundColor(R.drawable.bg_category_unselect);
-//                menClothing.setBackgroundColor(R.drawable.bg_category_unselect);
-//                electronics.setBackgroundColor(R.drawable.bg_category_unselect);
-//                womensClothing.setBackgroundColor(R.drawable.bg_category_selected);
+                allProducts.setBackgroundResource(R.drawable.bg_category_unselect);
+                jewelery.setBackgroundResource(R.drawable.bg_category_unselect);
+                menClothing.setBackgroundResource(R.drawable.bg_category_unselect);
+                electronics.setBackgroundResource(R.drawable.bg_category_unselect);
+                womensClothing.setBackgroundResource(R.drawable.bg_category_selected);
 //                Toast.makeText(this, R.string.women_s_clothing, Toast.LENGTH_SHORT).show();
             }
         }
