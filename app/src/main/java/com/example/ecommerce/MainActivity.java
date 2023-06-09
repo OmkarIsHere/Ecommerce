@@ -1,11 +1,13 @@
 package com.example.ecommerce;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,6 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView userImg, allProducts, electronics,jewelery, menClothing, womensClothing;
     RecyclerView recyclerProducts;
     ProgressBar progressBar;
+    String s=null;
     final String urlAllProducts = "https://fakestoreapi.com/products";
     final String urlElectronicsProducts = "https://fakestoreapi.com/products/category/electronics";
     final String urlJeweleryProducts = "https://fakestoreapi.com/products/category/jewelery";
@@ -47,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final String urlwomensClothingProducts = "https://fakestoreapi.com/products/category/women's%20clothing";
     final String urlSortProductsAsc = "https://fakestoreapi.com/products?sort=asc";
     final String urlSortProductsDesc = "https://fakestoreapi.com/products?sort=desc";
-
+    final String urlUser = "https://inundated-lenders.000webhostapp.com/api/login.php";
     ArrayList<Products> productsArrayList = new ArrayList<>();
     ArrayList<String> arrSpinner = new ArrayList<>();
     @Override
@@ -98,6 +104,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userImg.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
         });
+
+        SharedPreferences loggedIn = getSharedPreferences("email", MODE_PRIVATE);
+        String email = loggedIn.getString("email", "Guest");
+        if(!email.equals("Guest")){
+            getUserData(urlUser, email);
+        }
+        SharedPreferences alldata = getSharedPreferences("alldata", MODE_PRIVATE);
+        s = alldata.getString("uName", "Guest");
+        if
+        String ss = s.substring(0,1);
+        userImg.setText(ss);
+        userImg.setBackgroundResource(R.color.primary);
+
     }
     @Override
     public void onClick(View v) {
@@ -200,6 +219,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Volley.newRequestQueue(MainActivity.this).add(stringRequest);
         Log.d(TAG, "queued success: ");
+
+    }
+    private void getUserData(String url, String email){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        String uid = null;
+                        String  uname = null;
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            uid = jsonObject.getString("uId");
+                            uname = jsonObject.getString("uName");
+                            SharedPreferences alldata = getSharedPreferences("alldata", MODE_PRIVATE);
+                            SharedPreferences.Editor prefEditor = alldata.edit();
+                            prefEditor.putString("uId",uid);
+                            prefEditor.putString("uEmail",email);
+                            prefEditor.putString("uName",uname);
+                            prefEditor.apply();
+                            s = uname.substring(0,1);
+                            userImg.setText(s);
+                            userImg.setBackgroundResource(R.color.primary);
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "LogE " + error.getMessage());
+                    }
+
+                }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("getdata", "getdata");
+                params.put("email", email);
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                50000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+        Log.d(TAG, "userData queued success:");
 
     }
 
