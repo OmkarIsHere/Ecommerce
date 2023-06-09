@@ -4,11 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,69 +30,79 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "LoginActivity";
+public class VerificationActivity extends AppCompatActivity {
+    private static final String TAG = "VerificationActivity";
     private static final String url = "https://inundated-lenders.000webhostapp.com/api/login.php";
-    private TextView signup;
-    TextInputEditText  edtEmail, edtPassword;
-    Button btnLogin;
+    ImageButton btnBack;
+    TextView txtEmail;
+    TextInputEditText edtOtp;
     RelativeLayout relativeLayout;
     ProgressBar progressBar;
+    String email;
+    Button btnSubmit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        signup =findViewById(R.id.txtSignUp);
-        edtEmail= (TextInputEditText)findViewById(R.id.edtEmail);
-        edtPassword= (TextInputEditText)findViewById(R.id.edtPassword);
-        btnLogin = findViewById(R.id.btnLogin);
+
+        setContentView(R.layout.activity_verification);
+        btnBack= findViewById(R.id.btnBack);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        edtOtp = (TextInputEditText)findViewById(R.id.edtOtpCode);
+        txtEmail = findViewById(R.id.txtEmail);
         relativeLayout =(RelativeLayout)findViewById(R.id.relativeLayout);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
+        if(relativeLayout.getVisibility()== View.VISIBLE){
+            relativeLayout.setVisibility(View.GONE);
+        }
 
-        signup.setOnClickListener(v -> {
-            startActivity(new Intent(this, SignUpActivity.class));
-
+        btnBack.setOnClickListener(v -> {
+            onBackPressed();
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        if(getIntent().hasExtra("email")){
+            email = getIntent().getStringExtra("email");
+            String getEmail = "Email id - " + email;
+            txtEmail.setText(getEmail);
+        }
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    String tempEmail = Objects.requireNonNull(edtEmail.getText()).toString().trim();
-                    String tempPass = Objects.requireNonNull(edtPassword.getText()).toString().trim();
-
-                    if(!tempEmail.equals("") || !tempPass.equals("")){
-                        checkLogin(tempEmail, tempPass);
-                    }else{
-                        Toast.makeText(getApplicationContext(),"Both the fields are mandatory", Toast.LENGTH_LONG).show();
-                    }
+                String otp = Objects.requireNonNull(edtOtp.getText()).toString();
+                if(otp.length()==6)
+                    verifyOtp(email,otp);
+                else
+                    Toast.makeText(getApplicationContext(), "Enter 6 digit Code", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
-    private void checkLogin(String email, String password){
+
+    private void verifyOtp(String email, String code){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         String status = null;
+                        String  codee = null;
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             status = jsonObject.getString("status");
-
-                            if (status.equals("true")){
-                                SharedPreferences loggedIn = getSharedPreferences("email", MODE_PRIVATE);
-                                SharedPreferences.Editor prefEditor = loggedIn.edit();
-                                prefEditor.putString("email",email);
-                                prefEditor.apply();
-
-                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(i);
+                            codee = jsonObject.getString("code");
+                            if(codee.equals("right")){
+                                    Intent i = new Intent(VerificationActivity.this,LoginActivity.class);
+                                    startActivity(i);
+                            }
+                            else if(codee.equals("wrong")){
+                                    relativeLayout.setVisibility(View.GONE);
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(getApplicationContext(),"Entered otp is Wrong", Toast.LENGTH_LONG).show();
+                            }
+                            else if(status.equals("false")){
+                                Toast.makeText(getApplicationContext(),"Something went wrong, Please try again", Toast.LENGTH_LONG).show();
                             }
                             else{
-                                relativeLayout.setVisibility(View.GONE);
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(getApplicationContext(),"Wrong Email or Password", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Something went wrong, Please try again later", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
@@ -104,14 +114,15 @@ public class LoginActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "LogE " + error.getMessage());
                     }
+
                 }){
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("checklogin", "checklogin");
+                params.put("checkotp", "checkotp");
                 params.put("email", email);
-                params.put("password", password);
+                params.put("code", code);
                 return params;
             }
         };
@@ -124,6 +135,6 @@ public class LoginActivity extends AppCompatActivity {
         Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
         relativeLayout.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.VISIBLE);
-        Log.d(TAG, "queued success: ");
+        Log.d(TAG, "otp queued success: ");
     }
 }

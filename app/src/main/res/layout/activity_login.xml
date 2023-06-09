@@ -6,15 +6,35 @@
     android:orientation="vertical"
     android:background="@color/dullwhite"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:visibility="gone"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"/>
+        android:layout_height="@dimen/_50sdp"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp"
+        android:scaleType="fitStart"
+        android:src="@drawable/ecomm"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20sdp"/>
     <TextView
         android:id="@+id/txtLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="Login Here"
+        android:text="Login here"
         android:textStyle="bold"
         android:textSize="@dimen/_24ssp"
         android:clickable="true"
@@ -25,19 +45,20 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:hint="Email">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -46,6 +67,7 @@
             app:passwordToggleEnabled="true"
             android:hint="Password">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"/>
@@ -64,14 +86,15 @@
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:backgroundTint="@color/black"
         android:text="Login"/>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp">
         <TextView
             android:id="@+id/txtDontHaveAc"
             android:layout_width="wrap_content"
@@ -79,7 +102,7 @@
             android:layout_gravity="center"
             android:text="Dont have account?"
             android:textSize="@dimen/_14ssp"
-            android:layout_marginStart="@dimen/_10sdp"/>
+            />
         <TextView
             android:id="@+id/txtSignUp"
             android:layout_width="wrap_content"

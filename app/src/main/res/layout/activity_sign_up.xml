@@ -6,18 +6,28 @@
     android:background="@color/dullwhite"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+    </RelativeLayout>
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
+        android:clickable="true"
+        android:focusable="true"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_arrow_back_black"
-        android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:elevation="@dimen/_5sdp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"/>
     <TextView
         android:id="@+id/txtSignUp"
         android:layout_width="wrap_content"
@@ -36,7 +46,6 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -45,13 +54,13 @@
             android:layout_marginBottom="@dimen/_5sdp"
             android:hint="Full Name">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -60,13 +69,23 @@
             android:layout_marginBottom="@dimen/_5sdp"
             android:hint="Phone No">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="phone"/>
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/txtErrorNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter a valid phone Number"
+            android:layout_gravity="end"
+            android:textColor="#FF0000"
+            android:visibility="gone"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginEnd="@dimen/_10sdp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -75,13 +94,23 @@
             android:layout_marginBottom="@dimen/_5sdp"
             android:hint="Email">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/txtErrorEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter a valid email"
+            android:layout_gravity="end"
+            android:textColor="#FF0000"
+            android:visibility="gone"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginEnd="@dimen/_10sdp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -91,15 +120,26 @@
             app:passwordToggleEnabled="true"
             android:hint="Password">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/txtErrorPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Require 8 characters, 1 special char,  1 capital char, 1 No"
+            android:layout_gravity="end"
+            android:textColor="#FF0000"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginEnd="@dimen/_10sdp"/>
     </LinearLayout>
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:backgroundTint="@color/black"
