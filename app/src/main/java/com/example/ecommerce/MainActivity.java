@@ -112,10 +112,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         SharedPreferences alldata = getSharedPreferences("alldata", MODE_PRIVATE);
         s = alldata.getString("uName", "Guest");
-        if
-        String ss = s.substring(0,1);
-        userImg.setText(ss);
-        userImg.setBackgroundResource(R.color.primary);
+        if(!s.equals("Guest")){
+            String ss = s.substring(0,1);
+            userImg.setText(ss);
+            userImg.setBackgroundResource(R.color.primary);
+        }
+
 
     }
     @Override

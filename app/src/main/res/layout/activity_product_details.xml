@@ -6,7 +6,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ProductDetailsActivity">
-
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="@dimen/_5sdp"
+        android:background="@color/dullwhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -50,8 +67,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.046" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             <TextView
                 android:id="@+id/txtProductCategory"
                 android:layout_width="match_parent"
@@ -109,7 +124,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_marginEnd="@dimen/_7sdp"
-            android:background="@drawable/bg_button"
+            android:backgroundTint="@color/black"
             android:text="@string/add_to_cart"
             android:textSize="@dimen/_12ssp" />
     </RelativeLayout>

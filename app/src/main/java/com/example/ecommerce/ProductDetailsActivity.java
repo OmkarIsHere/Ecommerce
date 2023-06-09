@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     String pId, pImg, pTitle, pPrice, pCategory, pDescription;;
     Button addToCart;
     ImageButton btnBack;
+    RelativeLayout relativeLayout;
+    ProgressBar progressBar;
     int i = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
         pimg = findViewById(R.id.imgProduct);
         btnBack = findViewById(R.id.btnBack);
         addToCart = findViewById(R.id.btnAddCart);
+
+        relativeLayout =(RelativeLayout)findViewById(R.id.relative);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
         if(getIntent().hasExtra("pid")){
             pId = getIntent().getStringExtra("pid");
@@ -137,7 +144,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             status = jsonObject.getString("status");
 
-                            if (status.equals("true")){
+                            if (status.equals("success")){
                                 Intent i = new Intent(ProductDetailsActivity.this, MainActivity.class);
                                 startActivity(i);
                             }
@@ -176,6 +183,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
         Log.d(TAG, "queued success: ");
+        relativeLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
 }
