@@ -8,4 +8,7 @@
     <string name="jewelery">Jewelery</string>
     <string name="electronics">Electronics</string>
     <string name="imgproduct">imgProduct</string>
+    <string name="rs">Rs </string>
+    <string name="product_desc">Lock and Love Women\'s Removable Hooded</string>
+    <string name="add_to_cart">Add to Cart</string>
 </resources>

@@ -35,6 +35,7 @@
 
         <Spinner
             android:id="@+id/spinnerSort"
+            style="@style/Widget.AppCompat.DropDownItem.Spinner"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp" />

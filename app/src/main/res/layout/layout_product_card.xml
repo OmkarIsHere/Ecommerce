@@ -43,8 +43,8 @@
     <TextView
         android:id="@+id/txtProductTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lock and Love Women's Removable Hooded "
+        android:layout_height="@dimen/_35sdp"
+        android:text="Lock and Love Women's Removable Hooded"
         android:layout_marginStart="@dimen/_7sdp"
         android:layout_marginEnd="@dimen/_7sdp"
         android:textColor="@color/black"
@@ -55,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rs.599/-"
+        android:textStyle="bold"
         android:layout_marginStart="@dimen/_7sdp"
         android:layout_marginEnd="@dimen/_7sdp"
         android:textSize="@dimen/_12ssp"/>
