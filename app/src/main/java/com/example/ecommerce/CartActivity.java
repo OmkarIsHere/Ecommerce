@@ -53,7 +53,7 @@ public class CartActivity extends AppCompatActivity {
             getCartItem(uid);
         }
         else{
-            Toast.makeText(this,"No uid", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Login to see cart", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -62,17 +62,15 @@ public class CartActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        relativeLayout.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.GONE);
-                        String data = null;
+//                        String data;
                         try {
-                              JSONObject jsonObject = new JSONObject(response);
-                              data = jsonObject.getString("data");
-                              if(data.equals("true")){
+//                              JSONObject jsonObj = new JSONObject(response);
+//                              data = jsonObj.getString("data");
+//                              if(data.equals("true")){
                                   JSONArray list = new JSONArray(response);
                                   for(int i=0; i<list.length(); i++){
                                       JSONObject listObjects = list.getJSONObject(i);
-                                      String pId = listObjects.getString("uId");
+                                      String pId = listObjects.getString("pId");
                                       String pTitle = listObjects.getString("pTitle");
                                       String pPrice = listObjects.getString("pPrice");
                                       String pCategory = listObjects.getString("pCategory");
@@ -86,10 +84,12 @@ public class CartActivity extends AppCompatActivity {
 
                                   CartRecyclerAdapter cadapter = new CartRecyclerAdapter(getApplicationContext(),cartArrayList);
                                   recyclerCart.setAdapter(cadapter);
+                                  relativeLayout.setVisibility(View.GONE);
+                                  progressBar.setVisibility(View.GONE);
                                   Log.d(TAG, "adapter set ");
-                              }else {
-                                  Toast.makeText(getApplicationContext(), "bnsdkbskdfnbs", Toast.LENGTH_LONG).show();
-                              }
+//                              }else {
+//                                  Toast.makeText(getApplicationContext(), "bnsdkbskdfnbs", Toast.LENGTH_LONG).show();
+//                              }
 
                         } catch (JSONException e) {
                             relativeLayout.setVisibility(View.GONE);

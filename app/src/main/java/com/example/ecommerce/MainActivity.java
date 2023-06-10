@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView userImg, allProducts, electronics,jewelery, menClothing, womensClothing;
     RecyclerView recyclerProducts;
     ProgressBar progressBar;
+    RelativeLayout relativeLayout;
     String s=null;
     final String urlAllProducts = "https://fakestoreapi.com/products";
     final String urlElectronicsProducts = "https://fakestoreapi.com/products/category/electronics";
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinnerSort = findViewById(R.id.spinnerSort);
         cart = findViewById(R.id.imgBtnCart);
         progressBar = findViewById(R.id.progressBar);
+        relativeLayout = findViewById(R.id.relativeLayout);
 
         allProducts.setOnClickListener(this);
         electronics.setOnClickListener(this);
@@ -204,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             ProductsRecyclerAdapter padapter = new ProductsRecyclerAdapter(getApplicationContext(),productsArrayList);
                             recyclerProducts.setAdapter(padapter);
                             Log.d(TAG, "adapter set ");
+                            relativeLayout.setVisibility(View.GONE);
                             progressBar.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);

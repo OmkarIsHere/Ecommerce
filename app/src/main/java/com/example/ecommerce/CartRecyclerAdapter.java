@@ -65,7 +65,8 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         holder.pquant.setText(q);
         Log.d(TAG, "Quantity set");
         holder.pcat.setText(arrCart.get(position).pCategory);
-        holder.pid.setText(arrCart.get(position).pId);
+        String id = " " +arrCart.get(position).pId;
+        holder.pid.setText(id);
         Log.d(TAG, "Category and id set");
     }
 
@@ -81,10 +82,10 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
             super(itemView);
 
             pimg = itemView.findViewById(R.id.imgProduct);
-            pid = itemView.findViewById(R.id.txtproductId);
+            pid =(TextView)itemView.findViewById(R.id.txtpId);
             ptitle = itemView.findViewById(R.id.txtProductTitle);
             pprice = itemView.findViewById(R.id.txtProductPrice);
-            pcat = itemView.findViewById(R.id.txtProductCategory);
+            pcat = itemView.findViewById(R.id.txtProductCat);
             pquant = itemView.findViewById(R.id.txtProductQuantity);
         }
     }
