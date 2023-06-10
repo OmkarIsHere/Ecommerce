@@ -13,7 +13,7 @@
         android:gravity="start|center_vertical"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="Select a Quantity"
+        android:text="Select a Quantity: "
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="@dimen/_16ssp" />
@@ -85,7 +85,7 @@
             android:layout_weight="1"
             android:text="Continue"
             android:gravity="center"
-            android:backgroundTint="@color/primary"
+            android:backgroundTint="@color/black"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"

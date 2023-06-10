@@ -51,10 +51,8 @@ public class VerificationActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         relativeLayout =(RelativeLayout)findViewById(R.id.relativeLayout);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
-
-        if(relativeLayout.getVisibility()== View.VISIBLE){
-            relativeLayout.setVisibility(View.GONE);
-        }
+        relativeLayout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
 
         btnBack.setOnClickListener(v -> {
             onBackPressed();
@@ -83,6 +81,8 @@ public class VerificationActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        relativeLayout.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                         String status = null;
                         String  codee = null;
                         try {
@@ -94,8 +94,6 @@ public class VerificationActivity extends AppCompatActivity {
                                     startActivity(i);
                             }
                             else if(codee.equals("wrong")){
-                                    relativeLayout.setVisibility(View.GONE);
-                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getApplicationContext(),"Entered otp is Wrong", Toast.LENGTH_LONG).show();
                             }
                             else if(status.equals("false")){

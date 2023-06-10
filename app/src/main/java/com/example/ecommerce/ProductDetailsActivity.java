@@ -59,6 +59,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         relativeLayout =(RelativeLayout)findViewById(R.id.relative);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        relativeLayout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
 
         if(getIntent().hasExtra("pid")){
             pId = getIntent().getStringExtra("pid");
@@ -122,7 +124,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 btnCancel.setOnClickListener(v1 -> dialog.dismiss());
                 btnContinue.setOnClickListener(v12 -> {
                     String quantity = String.valueOf(pQuantity.getText());
-                    addDatatoCart(urlUser, uId, pId, pTitle, pPrice, quantity);
+                    addDatatoCart(urlUser, uId, pId, pTitle, pPrice, quantity, pCategory);
                     dialog.dismiss();
                 });
             }else{
@@ -132,12 +134,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void addDatatoCart(String url,String uid, String pid, String title, String price, String quantity){
+    private void addDatatoCart(String url,String uid, String pid, String title, String price, String quantity, String category){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         String status = null;
+                        Log.d(TAG, "onResponse: "+ status);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             status = jsonObject.getString("status");
@@ -152,6 +155,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
+                            Log.d(TAG, "error: "+ e);
                             throw new RuntimeException(e);
                         }
                     }
@@ -172,6 +176,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 params.put("title",title);
                 params.put("price",price);
                 params.put("quantity", quantity);
+                params.put("category", category);
                 return params;
             }
         };

@@ -107,14 +107,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SharedPreferences loggedIn = getSharedPreferences("email", MODE_PRIVATE);
         String email = loggedIn.getString("email", "Guest");
+        Log.d(TAG, "loggedIn: "+ email);
         if(!email.equals("Guest")){
             getUserData(urlUser, email);
         }
         SharedPreferences alldata = getSharedPreferences("alldata", MODE_PRIVATE);
         s = alldata.getString("uName", "Guest");
+        Log.d(TAG, "alldata: "+s);
         if(!s.equals("Guest")){
             String ss = s.substring(0,1);
-            userImg.setText(ss);
+            userImg.setText(ss.toUpperCase());
             userImg.setBackgroundResource(R.color.primary);
         }
 

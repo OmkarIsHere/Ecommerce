@@ -64,6 +64,8 @@ public class SignUpActivity extends AppCompatActivity {
         txtLogin = findViewById(R.id.txtSignUp);
         relativeLayout =(RelativeLayout)findViewById(R.id.relativeLayout);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        relativeLayout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
 
         btnBack.setOnClickListener(v -> {
             onBackPressed();

@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         signup =findViewById(R.id.txtSignUp);
         edtEmail= (TextInputEditText)findViewById(R.id.edtEmail);
         edtPassword= (TextInputEditText)findViewById(R.id.edtPassword);
@@ -49,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         relativeLayout =(RelativeLayout)findViewById(R.id.relativeLayout);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
+        relativeLayout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
 
         signup.setOnClickListener(v -> {
             startActivity(new Intent(this, SignUpActivity.class));
@@ -75,24 +78,22 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        relativeLayout.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                         String status = null;
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             status = jsonObject.getString("status");
-
-                            if (status.equals("true")){
+                            if(status.equals("true")){
                                 SharedPreferences loggedIn = getSharedPreferences("email", MODE_PRIVATE);
                                 SharedPreferences.Editor prefEditor = loggedIn.edit();
                                 prefEditor.putString("email",email);
                                 prefEditor.apply();
-
-                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                             }
                             else{
-                                relativeLayout.setVisibility(View.GONE);
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(getApplicationContext(),"Wrong Email or Password", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Wrong email id or password", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
