@@ -62,6 +62,7 @@ public class CartActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d(TAG, "onResponse: " + response);
 //                        String data;
                         try {
 //                              JSONObject jsonObj = new JSONObject(response);
@@ -94,7 +95,7 @@ public class CartActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             relativeLayout.setVisibility(View.GONE);
                             progressBar.setVisibility(View.GONE);
-                            Log.d(TAG, "json exception ");
+                            Log.d(TAG, "json exception "+ e);
                             throw new RuntimeException(e);
                         }
                     }

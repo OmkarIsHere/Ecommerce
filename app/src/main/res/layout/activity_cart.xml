@@ -10,7 +10,6 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dullwhite"
         android:elevation="@dimen/_10sdp"
         android:orientation="vertical"
         android:visibility="visible"
@@ -31,8 +30,8 @@
         android:id="@+id/btnBack"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginEnd="359dp"
         android:layout_marginBottom="4dp"
+        android:layout_marginEnd="@dimen/_280sdp"
         android:background="@android:color/transparent"
         android:clickable="true"
         android:elevation="@dimen/_5sdp"
@@ -55,6 +54,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCart"
             android:layout_width="match_parent"
+            android:paddingBottom="@dimen/_10sdp"
             android:layout_height="wrap_content"/>
         </ScrollView>
     </LinearLayout>

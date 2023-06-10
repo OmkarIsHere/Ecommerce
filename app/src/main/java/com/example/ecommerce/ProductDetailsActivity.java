@@ -139,14 +139,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        String status = null;
-                        Log.d(TAG, "onResponse: "+ status);
+                        relativeLayout.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
+                        Log.d(TAG, "response - "+ response);
+                        String status;
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             status = jsonObject.getString("status");
-
-                                relativeLayout.setVisibility(View.GONE);
-                                progressBar.setVisibility(View.GONE);
+                            Log.d(TAG, "status? - "+ status);
                             if (status.equals("success")){
                                 Intent i = new Intent(ProductDetailsActivity.this, MainActivity.class);
                                 startActivity(i);

@@ -83,11 +83,12 @@ public class VerificationActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         relativeLayout.setVisibility(View.GONE);
                         progressBar.setVisibility(View.GONE);
+                        Log.d(TAG, "onResponse: "+ response);
                         String status = null;
                         String  codee = null;
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            status = jsonObject.getString("status");
+//                            status = jsonObject.getString("status");
                             codee = jsonObject.getString("code");
                             if(codee.equals("right")){
                                     Intent i = new Intent(VerificationActivity.this,LoginActivity.class);
@@ -96,9 +97,9 @@ public class VerificationActivity extends AppCompatActivity {
                             else if(codee.equals("wrong")){
                                     Toast.makeText(getApplicationContext(),"Entered otp is Wrong", Toast.LENGTH_LONG).show();
                             }
-                            else if(status.equals("false")){
-                                Toast.makeText(getApplicationContext(),"Something went wrong, Please try again", Toast.LENGTH_LONG).show();
-                            }
+//                            else if(status.equals("false")){
+//                                Toast.makeText(getApplicationContext(),"Something went wrong, Please try again", Toast.LENGTH_LONG).show();
+//                            }
                             else{
                                 Toast.makeText(getApplicationContext(),"Something went wrong, Please try again later", Toast.LENGTH_LONG).show();
                             }
