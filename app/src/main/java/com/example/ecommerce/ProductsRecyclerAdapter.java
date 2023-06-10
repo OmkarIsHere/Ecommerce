@@ -28,7 +28,6 @@ import java.util.Objects;
 public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecyclerAdapter.ViewHolder> {
     private static final String TAG = "Adapter";
     Context context;
-    String location;
     ArrayList<Products> arrProducts;
 
     ProductsRecyclerAdapter(Context context, ArrayList<Products> arrProducts){

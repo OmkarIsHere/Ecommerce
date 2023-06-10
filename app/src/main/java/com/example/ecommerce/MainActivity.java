@@ -105,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, LoginActivity.class));
         });
 
+        cart.setOnClickListener(v -> {
+            startActivity(new Intent(this, CartActivity.class));
+        });
+
         SharedPreferences loggedIn = getSharedPreferences("email", MODE_PRIVATE);
         String email = loggedIn.getString("email", "Guest");
         Log.d(TAG, "loggedIn: "+ email);
