@@ -42,43 +42,31 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         View view = LayoutInflater.from(context).inflate(R.layout.layout_cart_item, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(view);
+        Log.d(TAG, "onCreateViewHolder: ");
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if(!Objects.equals(arrCart.get(position).pImg, null)) {
+        if(!Objects.equals(arrCart.get(position).pImg, "null")) {
             Glide.with(context)
                     .load(arrCart.get(position).pImg)
                     .into(holder.pimg);
         }else{
             holder.pimg.setBackgroundResource(R.drawable.no_image);
         }
+        Log.d(TAG, "Image set");
         String title = arrCart.get(position).pTitle;
             holder.ptitle.setText(title);
         String price ="Rs. "+ (arrCart.get(position).pPrice) + "/-";
+        Log.d(TAG, "Price set");
         holder.pprice.setText(price);
         String q ="Quantity : "+ arrCart.get(position).pQuantity;
         holder.pquant.setText(q);
+        Log.d(TAG, "Quantity set");
         holder.pcat.setText(arrCart.get(position).pCategory);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Log.d(TAG, "onClicked:");
-//                Intent intent = new Intent(context, ProductDetailsActivity.class);
-//                intent.putExtra("pid", arrCart.get(holder.getLayoutPosition()).pId);
-//                intent.putExtra("pimg", arrCart.get(holder.getLayoutPosition()).pImg);
-//                intent.putExtra("ptitle", title);
-//                intent.putExtra("pprice", arrCart.get(holder.getLayoutPosition()).pPrice);
-//                intent.putExtra("pcat", arrCart.get(holder.getLayoutPosition()).pCategory);
-//                intent.putExtra("pdesc", arrCart.get(holder.getLayoutPosition()).pDescription);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-//                context.getApplicationContext().startActivity(intent);
-//                Log.d(TAG, "intent passed");
-//
-//            }
-//        });
+        holder.pid.setText(arrCart.get(position).pId);
+        Log.d(TAG, "Category and id set");
     }
 
     @Override
@@ -88,11 +76,12 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView pimg;
-        TextView ptitle, pprice, pquant, pcat;
+        TextView pid, ptitle, pprice, pquant, pcat;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             pimg = itemView.findViewById(R.id.imgProduct);
+            pid = itemView.findViewById(R.id.txtproductId);
             ptitle = itemView.findViewById(R.id.txtProductTitle);
             pprice = itemView.findViewById(R.id.txtProductPrice);
             pcat = itemView.findViewById(R.id.txtProductCategory);

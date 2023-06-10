@@ -52,6 +52,9 @@ public class CartActivity extends AppCompatActivity {
         if(!uid.equals("0")){
             getCartItem(uid);
         }
+        else{
+            Toast.makeText(this,"No uid", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void getCartItem(String uid){
@@ -61,29 +64,37 @@ public class CartActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         relativeLayout.setVisibility(View.GONE);
                         progressBar.setVisibility(View.GONE);
+                        String data = null;
                         try {
-                            JSONArray list = new JSONArray(response);
-                            for(int i=0; i<list.length(); i++){
-                                JSONObject listObjects = list.getJSONObject(i);
-                                String pId = listObjects.getString("uId");
-//                                String pImg = listObjects.getString("image");
-                                String pTitle = listObjects.getString("pTitle");
-                                String pPrice = listObjects.getString("pPrice");
-                                String pCategory = listObjects.getString("pCategory");
-                                String pQuantity = listObjects.getString("pQuantity");
+                              JSONObject jsonObject = new JSONObject(response);
+                              data = jsonObject.getString("data");
+                              if(data.equals("true")){
+                                  JSONArray list = new JSONArray(response);
+                                  for(int i=0; i<list.length(); i++){
+                                      JSONObject listObjects = list.getJSONObject(i);
+                                      String pId = listObjects.getString("uId");
+                                      String pTitle = listObjects.getString("pTitle");
+                                      String pPrice = listObjects.getString("pPrice");
+                                      String pCategory = listObjects.getString("pCategory");
+                                      String pQuantity = listObjects.getString("pQuantity");
+                                      String pImg = "null";//listObjects.getString("image");
 
+                                      Cart cart = new Cart(pId, pImg , pTitle, pPrice, pCategory, pQuantity);
+                                      cartArrayList.add(cart);
+                                  }
+                                  Log.d(TAG,"arrData: "+ cartArrayList.toString());
 
-                                Cart cart = new Cart(pId, null , pTitle, pPrice, pCategory, pQuantity);
-                                cartArrayList.add(cart);
-                            }
-                            Log.d(TAG,"arrData: "+ cartArrayList.toString());
+                                  CartRecyclerAdapter cadapter = new CartRecyclerAdapter(getApplicationContext(),cartArrayList);
+                                  recyclerCart.setAdapter(cadapter);
+                                  Log.d(TAG, "adapter set ");
+                              }else {
+                                  Toast.makeText(getApplicationContext(), "bnsdkbskdfnbs", Toast.LENGTH_LONG).show();
+                              }
 
-                            CartRecyclerAdapter cadapter = new CartRecyclerAdapter(getApplicationContext(),cartArrayList);
-                            recyclerCart.setAdapter(cadapter);
-                            Log.d(TAG, "adapter set ");
                         } catch (JSONException e) {
                             relativeLayout.setVisibility(View.GONE);
                             progressBar.setVisibility(View.GONE);
+                            Log.d(TAG, "json exception ");
                             throw new RuntimeException(e);
                         }
                     }

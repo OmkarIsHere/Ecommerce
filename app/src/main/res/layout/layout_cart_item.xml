@@ -71,6 +71,14 @@
                 android:textAlignment="viewEnd"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
+            <TextView
+                android:id="@+id/txtProductId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_2ssp" />
         </LinearLayout>
 
     </LinearLayout>
