@@ -147,6 +147,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 Intent i = new Intent(SignUpActivity.this, VerificationActivity.class);
                                 i.putExtra("email", email);
                                 startActivity(i);
+                                finish();
                             }
                             else if (status.equals("exists")){
                                 relativeLayout.setVisibility(View.GONE);

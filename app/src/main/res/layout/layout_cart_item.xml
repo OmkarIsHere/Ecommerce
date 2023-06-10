@@ -8,15 +8,14 @@
 
     <ImageView
         android:id="@+id/imgProduct"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_70sdp"
         android:layout_gravity="center"
         android:layout_margin="@dimen/_5sdp"
         android:clickable="true"
         android:contentDescription="@string/imgproduct"
         android:focusable="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/temp_poster" />
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_marginEnd="@dimen/_7sdp"
-            android:text="Lock and Love Women's Removable sndsajbd ndkjsbnkjs nkjsdnbkjsbd sjdnsf ndsnfjs dndkjsb  Hooded"
+            android:text="Lock and Love Women's Removable sndsajbd ndkjsbnkjs 19 123456"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
 
@@ -42,7 +41,6 @@
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_marginEnd="@dimen/_7sdp"
             android:text="Category - Electronics"
-            android:textColor="@color/black"
             android:textSize="@dimen/_11ssp" />
 
         <LinearLayout
@@ -54,8 +52,8 @@
                 android:id="@+id/txtProductPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_7sdp"
-                android:layout_marginEnd="@dimen/_7sdp"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_1sdp"
                 android:layout_weight="1"
                 android:text="Rs.599/-"
                 android:textSize="@dimen/_12ssp"
@@ -65,13 +63,22 @@
                 android:id="@+id/txtProductQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_7sdp"
-                android:layout_marginEnd="@dimen/_7sdp"
                 android:layout_weight="1"
                 android:text="Quantity: 4"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
+            <ImageButton
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:background="@android:color/transparent"
+                />
             <TextView
                 android:id="@+id/txtpId"
                 android:layout_width="wrap_content"

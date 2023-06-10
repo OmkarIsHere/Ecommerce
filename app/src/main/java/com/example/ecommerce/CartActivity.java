@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -32,9 +34,11 @@ import java.util.Map;
 
 public class CartActivity extends AppCompatActivity {
     private static final String TAG = "CartActivity";
-    final String url = "https://inundated-lenders.000webhostapp.com/api/login.php";
+    final String api = "https://inundated-lenders.000webhostapp.com/api/login.php";
     ArrayList<Cart> cartArrayList = new ArrayList<>();
     ProgressBar progressBar;
+    ImageButton btnBack;
+    Button btnCheckout;
     RelativeLayout relativeLayout;
     RecyclerView recyclerCart;
     @Override
@@ -43,31 +47,34 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         recyclerCart = (RecyclerView)findViewById(R.id.recyclerCart);
         recyclerCart.setLayoutManager(new LinearLayoutManager(this));
+        btnBack = findViewById(R.id.btnBack);
+        btnCheckout = findViewById(R.id.btnCheckout);
         progressBar = findViewById(R.id.progressBar);
         relativeLayout = findViewById(R.id.relativeLayout);
+
+
+        btnBack.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
         SharedPreferences alldata = getSharedPreferences("alldata", MODE_PRIVATE);
         String uid = alldata.getString("uId", "0");
         Log.d(TAG, "alldata: "+uid);
         if(!uid.equals("0")){
-            getCartItem(uid);
+            getCartItem(uid, api);
         }
         else{
-            Toast.makeText(this,"Login to see cart", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Login to see cart items", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void getCartItem(String uid){
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+    private void getCartItem(String uid, String url){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d(TAG, "onResponse: " + response);
-//                        String data;
                         try {
-//                              JSONObject jsonObj = new JSONObject(response);
-//                              data = jsonObj.getString("data");
-//                              if(data.equals("true")){
+                        Log.d(TAG, "Response: " + response);
                                   JSONArray list = new JSONArray(response);
                                   for(int i=0; i<list.length(); i++){
                                       JSONObject listObjects = list.getJSONObject(i);
@@ -78,23 +85,23 @@ public class CartActivity extends AppCompatActivity {
                                       String pQuantity = listObjects.getString("pQuantity");
                                       String pImg = "null";//listObjects.getString("image");
 
-                                      Cart cart = new Cart(pId, pImg , pTitle, pPrice, pCategory, pQuantity);
+                                      Cart cart = new Cart(uid, pId, pImg , pTitle, pPrice, pCategory, pQuantity);
                                       cartArrayList.add(cart);
                                   }
                                   Log.d(TAG,"arrData: "+ cartArrayList.toString());
-
                                   CartRecyclerAdapter cadapter = new CartRecyclerAdapter(getApplicationContext(),cartArrayList);
                                   recyclerCart.setAdapter(cadapter);
                                   relativeLayout.setVisibility(View.GONE);
                                   progressBar.setVisibility(View.GONE);
+                                  btnBack.setVisibility(View.VISIBLE);
+                                  btnCheckout.setVisibility(View.VISIBLE);
                                   Log.d(TAG, "adapter set ");
-//                              }else {
-//                                  Toast.makeText(getApplicationContext(), "bnsdkbskdfnbs", Toast.LENGTH_LONG).show();
-//                              }
 
                         } catch (JSONException e) {
                             relativeLayout.setVisibility(View.GONE);
                             progressBar.setVisibility(View.GONE);
+                            btnBack.setVisibility(View.VISIBLE);
+                            btnCheckout.setVisibility(View.VISIBLE);
                             Log.d(TAG, "json exception "+ e);
                             throw new RuntimeException(e);
                         }
@@ -105,7 +112,6 @@ public class CartActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(), "" + error.getMessage(), Toast.LENGTH_LONG).show();
                         Log.d(TAG, "LogE " + error.getMessage());
-
                     }
 
                 }){
@@ -113,7 +119,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("getcart", "getcart");
+                params.put("getCart", "getCart");
                 params.put("uId", uid);
                 return params;
             }
@@ -125,6 +131,6 @@ public class CartActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Volley.newRequestQueue(CartActivity.this).add(stringRequest);
-        Log.d(TAG, "queued success: ");
+        Log.d(TAG, "cart queued success: ");
     }
 }

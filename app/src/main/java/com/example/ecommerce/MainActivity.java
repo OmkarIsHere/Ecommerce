@@ -2,6 +2,7 @@ package com.example.ecommerce;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final String urlUser = "https://inundated-lenders.000webhostapp.com/api/login.php";
     ArrayList<Products> productsArrayList = new ArrayList<>();
     ArrayList<String> arrSpinner = new ArrayList<>();
-    @SuppressLint("ResourceAsColor")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,11 +127,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(!s.equals("Guest")){
             String ss = s.substring(0,1);
             userImg.setText(ss.toUpperCase());
-            userImg.setBackgroundResource(R.color.white);
-            userImg.setTextColor(getResources().getColor(R.color.black));
+            userImg.setBackgroundResource(R.color.dullwhite);
+            userImg.setTextColor(ContextCompat.getColor(this,R.color.black));
         }
-
-
     }
     @Override
     public void onClick(View v) {
@@ -253,9 +252,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             prefEditor.putString("uEmail",email);
                             prefEditor.putString("uName",uname);
                             prefEditor.apply();
-                            s = uname.substring(0,1);
-                            userImg.setText(s);
-                            userImg.setBackgroundResource(R.color.primary);
+//                            s = uname.substring(0,1);
+//                            userImg.setText(s.toUpperCase());
+//                            userImg.setBackgroundResource(R.color.dullwhite);
+//                            userImg.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.black));
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);

@@ -1,10 +1,11 @@
 package com.example.ecommerce;
 
 public class Cart {
-    String  pId, pImg, pTitle, pPrice, pCategory, pQuantity;
+    String uId, pId, pImg, pTitle, pPrice, pCategory, pQuantity;
 
-    Cart(String pId, String pImg,String pTitle,String pPrice, String pCategory,String pQuantity){
+    Cart(String uId,String pId, String pImg,String pTitle,String pPrice, String pCategory,String pQuantity){
         this.pId=pId;
+        this.uId=uId;
         this.pImg = pImg;
         this.pTitle =pTitle;
         this.pPrice =pPrice;
