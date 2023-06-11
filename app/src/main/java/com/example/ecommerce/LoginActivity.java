@@ -90,7 +90,9 @@ public class LoginActivity extends AppCompatActivity {
                                 prefEditor.putString("email",email);
                                 prefEditor.apply();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(i);
+                                finish();
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),"Wrong email id or password", Toast.LENGTH_LONG).show();

@@ -130,9 +130,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     dialog.dismiss();
                 });
             }else{
-                startActivity(new Intent(ProductDetailsActivity.this, LoginActivity.class));
+                Intent i = new Intent(ProductDetailsActivity.this, LoginActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
-
         });
     }
 

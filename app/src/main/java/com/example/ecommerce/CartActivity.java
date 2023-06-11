@@ -90,7 +90,7 @@ public class CartActivity extends AppCompatActivity {
                             int tPrice, tQuantity, tProducts;
                             tPrice=tQuantity=tProducts=0;
                             Log.d(TAG, "Response: " + response);
-                             JSONArray list = new JSONArray(response);
+                            JSONArray list = new JSONArray(response);
                             JSONObject listObject = list.getJSONObject(0);
                             data = listObject.getString("data");
                             if(data.equals("true")){
@@ -116,33 +116,35 @@ public class CartActivity extends AppCompatActivity {
                                   Log.d(TAG,totalProducts+" - "+totalPrice+" - "+totalQuantity);
                                   Log.d(TAG,"arrData: "+ cartArrayList.toString());
 
-                                SharedPreferences orderSummery = getSharedPreferences("orderSummery", MODE_PRIVATE);
-                                SharedPreferences.Editor prefEditor = orderSummery.edit();
-                                prefEditor.putString("totalProducts",totalProducts);
-                                prefEditor.putString("totalPrice",totalPrice);
-                                prefEditor.putString("totalQuantity",totalQuantity);
-                                prefEditor.apply();
+                                    SharedPreferences orderSummery = getSharedPreferences("orderSummery", MODE_PRIVATE);
+                                    SharedPreferences.Editor prefEditor = orderSummery.edit();
+                                    prefEditor.putString("totalProducts",totalProducts);
+                                    prefEditor.putString("totalPrice",totalPrice);
+                                    prefEditor.putString("totalQuantity",totalQuantity);
+                                    prefEditor.apply();
 
                                   CartRecyclerAdapter cadapter = new CartRecyclerAdapter(getApplicationContext(),cartArrayList);
                                   recyclerCart.setAdapter(cadapter);
+                                  btnCheckout.setVisibility(View.VISIBLE);
                             } else if (data.equals("false")) {
+                                relativeLayout.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
                                 errorMessage.setVisibility(View.VISIBLE);
                                 errorMessage.setText(R.string.cart_is_empty);
-//                                Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_LONG).show();
+                                Log.d(TAG, "error message text visible");
+                                Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_LONG).show();
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
                             }
-                            relativeLayout.setVisibility(View.GONE);
-                            progressBar.setVisibility(View.GONE);
+
                             btnBack.setVisibility(View.VISIBLE);
-                            btnCheckout.setVisibility(View.VISIBLE);
-                            Log.d(TAG, "btn visible");
+
+
                         } catch (JSONException e) {
                             relativeLayout.setVisibility(View.GONE);
                             progressBar.setVisibility(View.GONE);
                             btnBack.setVisibility(View.VISIBLE);
-                            btnCheckout.setVisibility(View.VISIBLE);
                             Log.d(TAG, "json exception "+ e);
                             throw new RuntimeException(e);
                         }

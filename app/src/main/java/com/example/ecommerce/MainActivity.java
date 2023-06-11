@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -85,13 +87,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menClothing.setOnClickListener(this);
         womensClothing.setOnClickListener(this);
 
+            SharedPreferences loggedIn = getSharedPreferences("email", MODE_PRIVATE);
+            String email = loggedIn.getString("email", "Guest");
+            Log.d(TAG, "loggedIn: "+ email);
+            if(!email.equals("Guest")){
+                getUserData(urlUser, email);
+            }
+        runOnUiThread(new Runnable(){
+            public void run(){
+            SharedPreferences alldata = getSharedPreferences("alldata", MODE_PRIVATE);
+            s = alldata.getString("uName", "Guest");
+            Log.d(TAG, "alldata: "+s);
+            if(!s.equals("Guest")){
+                String ss = s.substring(0,1);
+                userImg.setText(ss.toUpperCase());
+                userImg.setBackgroundResource(R.color.dullwhite);
+                userImg.setTextColor(ContextCompat.getColor(MainActivity.this,R.color.black));
+             }
+            }
+        });
+
         recyclerProducts = (RecyclerView)findViewById(R.id.recyclerProducts);
         recyclerProducts.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
 
+
         arrSpinner.add("New to Old");
         arrSpinner.add("Old to New");
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrSpinner);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, arrSpinner);
         spinnerSort.setAdapter(spinnerAdapter);
+
+
+
 
         spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -117,21 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, CartActivity.class));
         });
 
-        SharedPreferences loggedIn = getSharedPreferences("email", MODE_PRIVATE);
-        String email = loggedIn.getString("email", "Guest");
-        Log.d(TAG, "loggedIn: "+ email);
-        if(!email.equals("Guest")){
-            getUserData(urlUser, email);
-        }
-        SharedPreferences alldata = getSharedPreferences("alldata", MODE_PRIVATE);
-        s = alldata.getString("uName", "Guest");
-        Log.d(TAG, "alldata: "+s);
-        if(!s.equals("Guest")){
-            String ss = s.substring(0,1);
-            userImg.setText(ss.toUpperCase());
-            userImg.setBackgroundResource(R.color.dullwhite);
-            userImg.setTextColor(ContextCompat.getColor(this,R.color.black));
-        }
+
     }
     @Override
     public void onClick(View v) {
