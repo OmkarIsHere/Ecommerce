@@ -36,7 +36,7 @@ import java.util.Objects;
 public class ProductDetailsActivity extends AppCompatActivity {
 
     private static final String TAG = "ProductDetailsActivity";
-    final String urlUser = "https://inundated-lenders.000webhostapp.com/api/login.php";
+    final String urlUser = "https://ecommdot.000webhostapp.com/api/ecomm.php";
     ImageView pimg;
     TextView ptitle, pprice, pdesc, pcat;
     String pId, pImg, pTitle, pPrice, pCategory, pDescription;;
@@ -65,7 +65,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
         if(getIntent().hasExtra("pid")){
             pId = getIntent().getStringExtra("pid");
             pTitle = getIntent().getStringExtra("ptitle");
-            pPrice = "Rs. " + getIntent().getStringExtra("pprice");
+            pPrice = getIntent().getStringExtra("pprice");
+            String rsPrice;
+            rsPrice = "$ " + getIntent().getStringExtra("pprice");
             pImg = getIntent().getStringExtra("pimg");
             pCategory = getIntent().getStringExtra("pcat");
             pDescription = getIntent().getStringExtra("pdesc");
@@ -80,7 +82,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             ptitle.setText(pTitle);
             pcat.setText(pCategory);
             pdesc.setText(pDescription);
-            pprice.setText(pPrice);
+            pprice.setText(rsPrice);
         }else{
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
             finish();
@@ -96,7 +98,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             if(!uId.equals("0")){
                 Dialog dialog = new Dialog(ProductDetailsActivity.this);
                 dialog.setContentView(R.layout.layout_alert_dialog);
-                dialog.setCancelable(false);
+                dialog.setCancelable(true);
                 dialog.show();
 
                 Button btnCancel = (Button)dialog.findViewById(R.id.btnCancel);
@@ -109,7 +111,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 pQuantity.setText(String.valueOf(i));
 
                 btnAdd.setOnClickListener(v1 -> {
-                   if(i>=1){
+                   if(i<=3 && i>=1){
                        i++;
                        pQuantity.setText(String.valueOf(i));
                    }
@@ -124,7 +126,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 btnCancel.setOnClickListener(v1 -> dialog.dismiss());
                 btnContinue.setOnClickListener(v12 -> {
                     String quantity = String.valueOf(pQuantity.getText());
-                    addDatatoCart(urlUser, uId, pId, pTitle, pPrice, quantity, pCategory);
+                    addDatatoCart(urlUser, uId, pId, pImg, pTitle, pPrice, quantity, pCategory);
                     dialog.dismiss();
                 });
             }else{
@@ -134,7 +136,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void addDatatoCart(String url,String uid, String pid, String title, String price, String quantity, String category){
+    private void addDatatoCart(String url,String uid, String pid, String pimg , String title, String price, String quantity, String category){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -173,6 +175,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 params.put("addtocart", "addtocart");
                 params.put("uid", uid);
                 params.put("pid", pid);
+                params.put("pimg", pimg);
                 params.put("title",title);
                 params.put("price",price);
                 params.put("quantity", quantity);

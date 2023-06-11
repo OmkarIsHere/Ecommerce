@@ -73,7 +73,7 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/secondary"
                 android:textSize="@dimen/_14ssp"
-                app:drawableStartCompat="@drawable/ic_search" />
+                app:drawableStartCompat="@drawable/ic_search_black" />
             <ImageButton
                 android:id="@+id/imgBtnCart"
                 android:layout_width="wrap_content"

@@ -32,7 +32,7 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-    private static final String url = "https://inundated-lenders.000webhostapp.com/api/login.php";
+    private static final String url = "https://ecommdot.000webhostapp.com/api/ecomm.php";
     private TextView signup;
     TextInputEditText  edtEmail, edtPassword;
     Button btnLogin;

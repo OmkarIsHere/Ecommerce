@@ -48,7 +48,7 @@ import java.util.Objects;
 
 public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapter.ViewHolder> {
     private static final String TAG = "CartAdapter";
-    final String api = "https://inundated-lenders.000webhostapp.com/api/login.php";
+    final String api = "https://ecommdot.000webhostapp.com/api/ecomm.php";
     long lastClick;
     Context context;
 
@@ -162,7 +162,7 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
                             String status = jsonObject.getString("status");
                             if(status.equals("success")){
                                 Intent i = new Intent(context.getApplicationContext(),CartActivity.class);
-                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);// | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);// | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                                 context.startActivity(i);
                             }
                             else if(status .equals("fail")){

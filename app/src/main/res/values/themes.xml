@@ -3,7 +3,18 @@
     <style name="Base.Theme.Ecommerce" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialogueTheme</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="android:statusBarColor"  >?android:attr/colorPrimary</item>
+        <item name="android:navigationBarColor" >?android:attr/colorPrimary</item>
 
+    </style>
+    <style name="BottomSheetDialogueTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet_white</item>
+    </style>
     <style name="Theme.Ecommerce" parent="Base.Theme.Ecommerce" />
 </resources>

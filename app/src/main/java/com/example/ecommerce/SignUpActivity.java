@@ -43,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
    TextInputEditText edtName,edtPhoneNo, edtEmail, edtPassword;
 
    TextView txtErrorNo, txtErrorEmail, txtErrorPass, txtLogin;
-    private static final String url = "https://inundated-lenders.000webhostapp.com/api/login.php";
+    private static final String url = "https://ecommdot.000webhostapp.com/api/ecomm.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

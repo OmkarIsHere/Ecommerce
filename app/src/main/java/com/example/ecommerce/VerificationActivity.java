@@ -32,7 +32,7 @@ import java.util.Objects;
 
 public class VerificationActivity extends AppCompatActivity {
     private static final String TAG = "VerificationActivity";
-    private static final String url = "https://inundated-lenders.000webhostapp.com/api/login.php";
+    private static final String url = "https://ecommdot.000webhostapp.com/api/ecomm.php";
     ImageButton btnBack;
     TextView txtEmail;
     TextInputEditText edtOtp;

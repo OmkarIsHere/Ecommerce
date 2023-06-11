@@ -24,7 +24,6 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
 public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecyclerAdapter.ViewHolder> {
     private static final String TAG = "Adapter";
     Context context;
@@ -62,7 +61,7 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         }else{
             holder.ptitle.setText(title);
         }
-        String price ="Rs. "+ (arrProducts.get(position).pPrice) + "/-";
+        String price ="$ "+ (arrProducts.get(position).pPrice);
         holder.pprice.setText(price);
         holder.pid.setText(arrProducts.get(position).pId);
         holder.pdesc.setText(arrProducts.get(position).pDescription);

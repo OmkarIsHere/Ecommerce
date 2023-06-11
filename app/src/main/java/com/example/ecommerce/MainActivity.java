@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final String urlwomensClothingProducts = "https://fakestoreapi.com/products/category/women's%20clothing";
     final String urlSortProductsAsc = "https://fakestoreapi.com/products?sort=asc";
     final String urlSortProductsDesc = "https://fakestoreapi.com/products?sort=desc";
-    final String urlUser = "https://inundated-lenders.000webhostapp.com/api/login.php";
+    final String urlUser = "https://ecommdot.000webhostapp.com/api/ecomm.php";
     ArrayList<Products> productsArrayList = new ArrayList<>();
     ArrayList<String> arrSpinner = new ArrayList<>();
 

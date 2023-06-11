@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg_order_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/black"
+        android:layout_margin="@dimen/_5sdp"
+        android:clickable="true"
+        android:contentDescription="@string/imgproduct"
+        android:focusable="true"
+        android:scaleType="fitXY" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtProductTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:text="Lock and Love Women's Removable sndsajbd ndkjsbnkjs 19 123456"
+            android:textSize="@dimen/_13ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_1sdp"
+                android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:text="Rs.599/-"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:id="@+id/txtProductQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Quantity: 4"
+                android:textAlignment="center"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
