@@ -80,7 +80,13 @@ public class CheckoutRecyclerAdapter extends RecyclerView.Adapter<CheckoutRecycl
         }
         Log.d(TAG, "Image set");
         String title = arrCart.get(position).pTitle;
-        holder.ptitle.setText(title);
+        if(title.length() > 33){
+            String firstHalf = title.substring(0,35);
+            String fullString = firstHalf + "...";
+            holder.ptitle.setText(fullString);
+        }else{
+            holder.ptitle.setText(title);
+        }
         String price ="$ "+ (arrCart.get(position).pPrice);
         Log.d(TAG, "Price set");
         holder.pprice.setText(price);

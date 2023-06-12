@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/txtProductTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_36sdp"
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_marginEnd="@dimen/_7sdp"
             android:text="Lock and Love Women's Removable sndsajbd ndkjsbnkjs 19 123456"

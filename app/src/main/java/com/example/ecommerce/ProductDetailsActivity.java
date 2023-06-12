@@ -39,7 +39,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     final String urlUser = "https://ecommdot.000webhostapp.com/api/ecomm.php";
     ImageView pimg;
     TextView ptitle, pprice, pdesc, pcat;
-    String pId, pImg, pTitle, pPrice, pCategory, pDescription;;
+    String pId, pImg, pTitle, pPrice, pCategory, pDescription;
     Button addToCart;
     ImageButton btnBack;
     RelativeLayout relativeLayout;
@@ -70,6 +70,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
             rsPrice = "$ " + getIntent().getStringExtra("pprice");
             pImg = getIntent().getStringExtra("pimg");
             pCategory = getIntent().getStringExtra("pcat");
+            if(pCategory.contains("'"))
+            {
+                pCategory = pCategory.replaceAll("'","");
+            }
+            if(pTitle.contains("'"))
+            {
+                pTitle = pTitle.replaceAll("'","");
+            }
             pDescription = getIntent().getStringExtra("pdesc");
 
             if(!Objects.equals(pImg , "")) {
@@ -151,8 +159,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             status = jsonObject.getString("status");
                             Log.d(TAG, "status? - "+ status);
                             if (status.equals("success")){
+                                Toast.makeText(getApplicationContext(),"Products successfully added to cart", Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(ProductDetailsActivity.this, MainActivity.class);
                                 startActivity(i);
+                                finish();
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_LONG).show();

@@ -87,8 +87,10 @@ public class CartActivity extends AppCompatActivity {
                         try {
                             String data;
                             String totalPrice, totalQuantity, totalProducts;
-                            int tPrice, tQuantity, tProducts;
-                            tPrice=tQuantity=tProducts=0;
+                            int tQuantity, tProducts;
+                            Double tPrice;
+                            tPrice= 0.0;
+                            tQuantity=tProducts=0;
                             Log.d(TAG, "Response: " + response);
                             JSONArray list = new JSONArray(response);
                             JSONObject listObject = list.getJSONObject(0);
@@ -104,7 +106,7 @@ public class CartActivity extends AppCompatActivity {
                                       String pQuantity = listObjects.getString("pQuantity");
 
                                       tProducts++; //= tProducts + Integer.parseInt(pId);
-                                      tPrice = tPrice + Integer.parseInt(pPrice);
+                                      tPrice = tPrice + (Double.parseDouble(pPrice) * Integer.parseInt(pQuantity));
                                       tQuantity = tQuantity + Integer.parseInt(pQuantity);
 
                                       Cart cart = new Cart(uid, pId, pImg , pTitle, pPrice, pCategory, pQuantity);
@@ -137,7 +139,8 @@ public class CartActivity extends AppCompatActivity {
                             else {
                                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
                             }
-
+                            relativeLayout.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                             btnBack.setVisibility(View.VISIBLE);
 
 

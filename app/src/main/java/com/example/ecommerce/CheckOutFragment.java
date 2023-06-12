@@ -60,6 +60,7 @@ public class CheckOutFragment extends BottomSheetDialogFragment {
         totalPrice= orderdata.getString("totalPrice","N/A");
         totalQuantity = orderdata.getString("totalQuantity","N/A");
 
+        totalPrice = "$ "+ totalPrice;
         txtTotalPrice.setText(totalPrice);
         txtTotalQuantity.setText(totalQuantity);
         txtTotalProducts.setText(totalProducts);
@@ -67,7 +68,6 @@ public class CheckOutFragment extends BottomSheetDialogFragment {
         btnContinue.setOnClickListener(v -> {
             Toast.makeText(getActivity(), "You have been successfully checkout", Toast.LENGTH_SHORT).show();
         });
-
 
         return view;
     }
