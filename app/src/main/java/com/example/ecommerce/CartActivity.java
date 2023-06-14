@@ -89,7 +89,7 @@ public class CartActivity extends AppCompatActivity {
                             String totalPrice, totalQuantity, totalProducts;
                             int tQuantity, tProducts;
                             Double tPrice;
-                            tPrice= 0.0;
+                            tPrice= 0.00;
                             tQuantity=tProducts=0;
                             Log.d(TAG, "Response: " + response);
                             JSONArray list = new JSONArray(response);
@@ -105,8 +105,13 @@ public class CartActivity extends AppCompatActivity {
                                       String pCategory = listObjects.getString("pCategory");
                                       String pQuantity = listObjects.getString("pQuantity");
 
+                                      if(!pPrice.contains(".")){
+                                          pPrice = pPrice + ".00";
+                                      }
+
                                       tProducts++; //= tProducts + Integer.parseInt(pId);
                                       tPrice = tPrice + (Double.parseDouble(pPrice) * Integer.parseInt(pQuantity));
+                                      Log.d(TAG, "tPrice " + tPrice);
                                       tQuantity = tQuantity + Integer.parseInt(pQuantity);
 
                                       Cart cart = new Cart(uid, pId, pImg , pTitle, pPrice, pCategory, pQuantity);
