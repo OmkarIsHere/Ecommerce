@@ -11,6 +11,12 @@ Note:-
 The database is published on the in.000webhost.com (free version) and because of that server bandwidth is less/limited, which causes buffering issues in the app. 
 
 
+## Preview
+
+Link of preview
+
+https://www.veed.io/view/01c5e7ce-4a09-4119-b629-690ddc8e2593?panel=share
+
 ## API Reference
 
 ### For products - 
@@ -163,26 +169,4 @@ POST -  https://ecommdot.000webhostapp.com/api/ecomm.php
 | `deleteItem`      | `string` | **Required**. to call this method |
 | `uId`      | `string` | **Required**. to delete product from cart contains uId |
 | `pId`      | `string` | **Required**. to delete product from cart contains pId |
-
-
-
-
-
-
-## Screenshots
-
-![App Screenshot](https://dl.dropboxusercontent.com/s/m9odwfhra7ot2wy/Login.png?dl=0)
-
-
-
-![App Screenshot](https://dl.dropboxusercontent.com/s/kf2ponl94dkfs79/HomeActivity.png?dl=0)
-
-
-
-![App Screenshot](https://dl.dropboxusercontent.com/s/vpzpwgywexima1d/Product%20Details.png?dl=0)
-
-
-
-![App Screenshot](https://dl.dropboxusercontent.com/s/5m43a4liofu0lce/Check%20out.png?dl=0)
-
 
