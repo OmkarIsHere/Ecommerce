@@ -2,6 +2,7 @@ package com.example.ecommerce;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -118,18 +119,23 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                 pQuantity.setText(String.valueOf(i));
 
+
                 btnAdd.setOnClickListener(v1 -> {
-                   if(i<=3 && i>=1){
+                   if(i<4){
                        i++;
                        pQuantity.setText(String.valueOf(i));
                    }
+                    if(i==4)
+                        Toast.makeText(ProductDetailsActivity.this, "Maximum 4 quantity can select", Toast.LENGTH_SHORT).show();
                 });
+
                 btnMinus.setOnClickListener(v1 -> {
                    if(i>1){
                        i--;
                    }
                    pQuantity.setText(String.valueOf(i));
                 });
+
 
                 btnCancel.setOnClickListener(v1 -> dialog.dismiss());
                 btnContinue.setOnClickListener(v12 -> {
