@@ -10,12 +10,12 @@ Users can add products to the cart and remove them from it if he/she wants. Afte
 Note:- 
 The database is published on the in.000webhost.com (free version) and because of that server bandwidth is less/limited, which causes buffering issues in the app. 
 
+**Download Apk** - https://drive.google.com/file/d/1_oolBIDrThMd7ZLyuDKIPE4dmZrOYmuX/view?usp=sharing
 
 ## Preview
 
-Link of preview
+https://github.com/OmkarIsHere/Ecommerce/assets/101088359/6edf0984-8e1d-4a90-82e8-4fb5a13f4fd4
 
-https://www.veed.io/view/01c5e7ce-4a09-4119-b629-690ddc8e2593?panel=share
 
 ## API Reference
 
